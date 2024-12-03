@@ -50,25 +50,23 @@ fun AccountDialog(dialogOpen : MutableState<Boolean>){
             text = {
                 Column(modifier = Modifier
                     .wrapContentHeight()
-                    .padding(16.dp),
-                    verticalArrangement = Arrangement.Center
-                    ) {
-                    TextField( value = "", onValueChange = {
+                    .padding(top = 16.dp),
+                    verticalArrangement = Arrangement.Center) {
+                    TextField(value = "", onValueChange = {
 
-                    }, modifier = Modifier.padding(top = 16.dp),
-                        label = { Text(text = "Email")}
-                    )
-                    TextField( value = "", onValueChange = {
+                    },
+                        label = { Text(text = "Enter Email ID") })
+                    TextField(value = "", onValueChange = {
 
-                    }, modifier = Modifier.padding(top = 8.dp),
-                        label = { Text(text = "Password")}
+                    },label = { Text(text = "Enter Password") }
                     )
                 }
             },
-            modifier = Modifier.fillMaxWidth().background(MaterialTheme.colors.primarySurface)
+            modifier = Modifier.fillMaxWidth().background(Color.Green)
                 .padding(8.dp),
-            shape = RoundedCornerShape(8.dp),
+            shape = RoundedCornerShape(20.dp),
             backgroundColor = Color.White,
+            contentColor = Color.Blue,
             properties = DialogProperties(
                 dismissOnBackPress = true,
                 dismissOnClickOutside = true

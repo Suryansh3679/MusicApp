@@ -45,6 +45,8 @@ import app.proj.musicappui.MainViewModel
 import app.proj.musicappui.Screen
 import app.proj.musicappui.screensInDrawer
 import app.proj.musicappui.ui.theme.AccountDialog
+import app.proj.musicappui.ui.theme.AccountView
+import app.proj.musicappui.ui.theme.SubscriptionView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -74,7 +76,7 @@ fun MainView(){
     }
     Scaffold (
         topBar = {
-            TopAppBar(title = { Text(text = "Home")},
+            TopAppBar(title = { Text(text = title.value)},
                 navigationIcon = { IconButton(onClick = {
                     // Open the drawer
                     scope.launch {
@@ -143,14 +145,14 @@ fun DrawerItem (
 fun Navigation(navController: NavController,viewModel: MainViewModel,pd : PaddingValues){
     // pd used because scaffold gives us pd value which if we don't use it gives us error
     NavHost(navController = navController as NavHostController,
-        startDestination = Screen.DrawerScreen.AddAccount.route,modifier = Modifier.padding(pd) ){
+        startDestination = Screen.DrawerScreen.Account.route,modifier = Modifier.padding(pd) ){
 
-        composable(Screen.DrawerScreen.AddAccount.route){
-
+        composable(Screen.DrawerScreen.Account.route){
+            AccountView()
         }
 
         composable(Screen.DrawerScreen.Subscription.route){
-
+            SubscriptionView()
         }
     }
 }
