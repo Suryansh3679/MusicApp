@@ -7,8 +7,11 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.ScaffoldState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
@@ -43,6 +46,7 @@ import androidx.navigation.compose.rememberNavController
 
 import app.proj.musicappui.MainViewModel
 import app.proj.musicappui.Screen
+import app.proj.musicappui.screensInBottom
 import app.proj.musicappui.screensInDrawer
 import app.proj.musicappui.ui.theme.AccountDialog
 import app.proj.musicappui.ui.theme.AccountView
@@ -74,7 +78,31 @@ fun MainView(){
         //  change the currentScreen.Title
         mutableStateOf(currentScreen.title)
     }
+
+    val bottomBar : @Composable () -> Unit = {
+        if (currentScreen is Screen.DrawerScreen || currentScreen == Screen.BottomScreen.Home){
+            BottomNavigation (modifier = Modifier.wrapContentSize()){
+                screensInBottom.forEach{
+                    item ->
+                    BottomNavigationItem(selected = currentRoute == item.bRoute,
+                        onClick = {
+                                  controller.navigate(item.bRoute)
+                        },
+                        icon = { Icon(painter = painterResource(id = item.icon), contentDescription = item.bTitle)},
+                        label = { Text(text = item.bTitle)  },
+                        selectedContentColor = Color.White,
+                        unselectedContentColor = Color.Black
+                    )
+
+                }
+            }
+        }
+    }
+
     Scaffold (
+
+        bottomBar = bottomBar,
+
         topBar = {
             TopAppBar(title = { Text(text = title.value)},
                 navigationIcon = { IconButton(onClick = {
@@ -146,6 +174,18 @@ fun Navigation(navController: NavController,viewModel: MainViewModel,pd : Paddin
     // pd used because scaffold gives us pd value which if we don't use it gives us error
     NavHost(navController = navController as NavHostController,
         startDestination = Screen.DrawerScreen.Account.route,modifier = Modifier.padding(pd) ){
+
+
+        composable(Screen.BottomScreen.Home.route){
+            // TODO ADD Home screen
+        }
+
+        composable(Screen.BottomScreen.Browse.route){
+
+        }
+        composable(Screen.BottomScreen.Library.route){
+
+        }
 
         composable(Screen.DrawerScreen.Account.route){
             AccountView()
