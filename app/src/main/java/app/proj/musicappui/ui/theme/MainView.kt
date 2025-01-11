@@ -50,6 +50,9 @@ import app.proj.musicappui.screensInBottom
 import app.proj.musicappui.screensInDrawer
 import app.proj.musicappui.ui.theme.AccountDialog
 import app.proj.musicappui.ui.theme.AccountView
+import app.proj.musicappui.ui.theme.Browse
+import app.proj.musicappui.ui.theme.Home
+import app.proj.musicappui.ui.theme.Library
 import app.proj.musicappui.ui.theme.SubscriptionView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -173,18 +176,19 @@ fun DrawerItem (
 fun Navigation(navController: NavController,viewModel: MainViewModel,pd : PaddingValues){
     // pd used because scaffold gives us pd value which if we don't use it gives us error
     NavHost(navController = navController as NavHostController,
-        startDestination = Screen.DrawerScreen.Account.route,modifier = Modifier.padding(pd) ){
+        startDestination = Screen.BottomScreen.Home.route,modifier = Modifier.padding(pd) ){
 
 
         composable(Screen.BottomScreen.Home.route){
             // TODO ADD Home screen
+            Home()
         }
 
         composable(Screen.BottomScreen.Browse.route){
-
+            Browse()
         }
         composable(Screen.BottomScreen.Library.route){
-
+            Library()
         }
 
         composable(Screen.DrawerScreen.Account.route){
